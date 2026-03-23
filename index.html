@@ -1,79 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>STC - Storm Tracking Center</title>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-
+  <title>STC - Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body style="margin:0; font-family:sans-serif; background:#0b0f14; color:white;">
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyAzL9TJ3i0u2U0lRoRnHOXKycPtoQmtB10",
-  authDomain: "stcalerts.firebaseapp.com",
-  projectId: "stcalerts",
-  storageBucket: "stcalerts.firebasestorage.app",
-  messagingSenderId: "570130296780",
-  appId: "1:570130296780:web:cf376823ff4c68108db769",
-  databaseURL: "https://stcalerts-default-rtdb.firebaseio.com"
-};
+<body style="margin:0; font-family:sans-serif; background:#0b0f14; color:white; text-align:center;">
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-</script>
+  <h1>🌩️ STC - Storm Tracking Center</h1>
 
-  <!-- Header -->
-  <div style="padding:20px; text-align:center; background:#111827;">
-    <h1>🌩️ STC - Storm Tracking Center</h1>
-    <p>Status: OFFLINE</p>
-  </div>
-
-  <!-- Navigation -->
-  <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:10px; padding:15px; background:#0f172a;">
-    <a href="#models" style="color:white; text-decoration:none; padding:10px 15px; background:#1f2937; border-radius:8px;">Models</a>
-    <a href="#live" style="color:white; text-decoration:none; padding:10px 15px; background:#1f2937; border-radius:8px;">Live Chasing</a>
-    <a href="#forecast" style="color:white; text-decoration:none; padding:10px 15px; background:#1f2937; border-radius:8px;">STC Forecast</a>
-    <a href="#radar" style="color:white; text-decoration:none; padding:10px 15px; background:#1f2937; border-radius:8px;">Live Radar</a>
-  </div>
-
-  <!-- Models -->
-  <div id="models" style="padding:40px; text-align:center;">
-    <h2>📊 Models</h2>
-    <p>Embed your model maps here (GFS, HRRR, etc.)</p>
-  </div>
-
-  <!-- Live Chasing -->
-  <div id="live" style="padding:40px; text-align:center; background:#0f172a;">
-    <h2>📡 Live Chasing</h2>
-    <iframe width="560" height="315"
-      src="https://www.youtube.com/embed/YOUR_STREAM_LINK"
-      frameborder="0" allowfullscreen>
-    </iframe>
-  </div>
-
-  <!-- STC Forecast -->
-  <div id="forecast" style="padding:40px; text-align:center;">
-    <h2>📅 STC Forecast</h2>
-    <p>Upload your forecast images here (14-day outlook, custom analysis, etc.)</p>
-
-    <!-- Example images -->
-    <img src="forecast1.jpg" style="width:90%; max-width:600px; margin:10px;">
-    <img src="forecast2.jpg" style="width:90%; max-width:600px; margin:10px;">
-  </div>
-
-  <!-- Live Radar -->
-  <div id="radar" style="padding:40px; text-align:center; background:#0f172a;">
-    <h2>🛰️ Live Radar</h2>
-    <iframe src="https://embed.windy.com/embed2.html"
-      width="800" height="500">
-    </iframe>
-  </div>
-
-  <!-- Footer -->
-  <div style="text-align:center; padding:20px; background:#111827;">
-    <p>© STC - Storm Tracking Center</p>
+  <div style="display:flex; flex-direction:column; gap:15px; padding:20px;">
+    <a href="models.html">📊 Models</a>
+    <a href="chasers.html">🌪️ Storm Chasers</a>
+    <a href="forecast.html">📅 STC Forecast</a>
+    <a href="radar.html">🛰️ Live Radar</a>
+    <a href="admin.html">🔐 Admin Panel</a>
   </div>
 
 </body>
