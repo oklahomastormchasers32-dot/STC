@@ -2,10 +2,27 @@
 <html>
 <head>
   <title>STC - Storm Tracking Center</title>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body style="margin:0; font-family:sans-serif; background:#0b0f14; color:white;">
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAzL9TJ3i0u2U0lRoRnHOXKycPtoQmtB10",
+  authDomain: "stcalerts.firebaseapp.com",
+  projectId: "stcalerts",
+  storageBucket: "stcalerts.firebasestorage.app",
+  messagingSenderId: "570130296780",
+  appId: "1:570130296780:web:cf376823ff4c68108db769",
+  databaseURL: "https://stcalerts-default-rtdb.firebaseio.com"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+</script>
 
   <!-- Header -->
   <div style="padding:20px; text-align:center; background:#111827;">
