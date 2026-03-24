@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Storm Chasers - STC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="margin:0; font-family:sans-serif; background:#0b0f14; color:white; text-align:center;">
+
+  <h1>🌪️ Storm Chasers</h1>
+
+  <a href="index.html" style="color:white;">⬅ Back Home</a>
+
+  <!-- Container -->
+  <div id="chasersContainer" style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px;"></div>
+
+  <script>
+    const chasers = [
+      { name: "WxLandonEdwards", category: "Media", yt: "https://www.youtube.com/@WxLandonEdwards" },
+      { name: "Reed Timmer", category: "Pro", yt: "https://www.youtube.com/@ReedTimmer" },
+      { name: "Brandon Copic", category: "Pro", yt: "https://www.youtube.com/@BrandonCopic" },
+      { name: "Freddy McKinney", category: "Pro", yt: "https://www.youtube.com/@FreddyMcKinney" },
+      { name: "Hank Schyma", category: "Pro", yt: "https://www.youtube.com/@HankSchyma" },
+      { name: "Connor Croff", category: "Pro", yt: "https://www.youtube.com/@ConnorCroff" },
+      { name: "Ryan Hall Y'all", category: "Media", yt: "https://www.youtube.com/@RyanHallYall" },
+      { name: "Brad Arnold", category: "Local", yt: "#" },
+      { name: "Aaron Jayjack", category: "Pro", yt: "https://www.youtube.com/@AaronJayjack" },
+      { name: "StormChaserIRL", category: "Media", yt: "https://www.youtube.com/@StormChaserIRL" },
+      { name: "Texas Storm Chasers", category: "Pro", yt: "https://www.youtube.com/@TexasStormChasers" }
+    ];
+
+    const container = document.getElementById("chasersContainer");
+
+    // Sort alphabetically
+    chasers.sort((a, b) => a.name.localeCompare(b.name));
+
+    chasers.forEach(chaser => {
+      const card = document.createElement("div");
+      card.style.background = "#1f2937";
+      card.style.padding = "15px";
+      card.style.borderRadius = "12px";
+      card.style.width = "220px";
+      card.style.transition = "0.3s";
+
+      card.onmouseover = () => card.style.transform = "scale(1.05)";
+      card.onmouseout = () => card.style.transform = "scale(1)";
+
+      card.innerHTML = `
+        <h3>${chaser.name}</h3>
+        <p>Category: ${chaser.category}</p>
+        <a href="${chaser.yt}" target="_blank" style="color:#60a5fa;">Visit YouTube</a>
+        <br><br>
+        <iframe width="200" height="120"
+          src="https://www.youtube.com/embed?listType=user_uploads&list=${chaser.yt.replace('https://www.youtube.com/@','')}"
+          frameborder="0" allowfullscreen>
+        </iframe>
+      `;
+
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
