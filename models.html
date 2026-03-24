@@ -2,17 +2,48 @@
 <html>
 <head>
   <title>Models - STC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body style="background:#0b0f14; color:white; text-align:center; font-family:sans-serif;">
+<body style="margin:0; font-family:sans-serif; background:#0b0f14; color:white; text-align:center;">
 
   <h1>📊 Weather Models</h1>
 
-  <a href="index.html">⬅ Back Home</a>
+  <a href="index.html" style="color:white;">⬅ Back Home</a>
 
   <div style="margin-top:20px;">
-    <p>GFS / HRRR / NAM / RAP / ECMWF will go here</p>
+    <button onclick="loadModel('gfs')">GFS</button>
+    <button onclick="loadModel('hrrr')">HRRR</button>
+    <button onclick="loadModel('nam')">NAM</button>
+    <button onclick="loadModel('rap')">RAP</button>
+    <button onclick="loadModel('ecmwf')">ECMWF</button>
   </div>
+
+  <div style="margin-top:20px;">
+    <iframe id="modelFrame" width="900" height="600" style="max-width:95%; border:none;"></iframe>
+  </div>
+
+  <script>
+    function loadModel(model) {
+      let frame = document.getElementById("modelFrame");
+
+      if (model === "gfs") {
+        frame.src = "https://www.tropicaltidbits.com/analysis/models/gfs/";
+      }
+      if (model === "hrrr") {
+        frame.src = "https://www.tropicaltidbits.com/analysis/models/hrrr/";
+      }
+      if (model === "nam") {
+        frame.src = "https://www.tropicaltidbits.com/analysis/models/nam/";
+      }
+      if (model === "rap") {
+        frame.src = "https://www.tropicaltidbits.com/analysis/models/rap/";
+      }
+      if (model === "ecmwf") {
+        frame.src = "https://www.tropicaltidbits.com/analysis/models/ecmwf/";
+      }
+    }
+  </script>
 
 </body>
 </html>
