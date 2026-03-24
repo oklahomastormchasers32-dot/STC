@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin - STC</title>
+</head>
+
+<body style="background:#0b0f14; color:white; text-align:center; font-family:sans-serif;">
+
+  <h1>🔐 Admin Panel</h1>
+
+  <a href="index.html">⬅ Back Home</a>
+
+  <div style="margin-top:20px;">
+    <p>Step 1:</p>
+    <input type="password" id="p1">
+    <button onclick="step1()">Submit</button>
+
+    <div id="step2" style="display:none;">
+      <p>Step 2:</p>
+      <input type="password" id="p2">
+      <button onclick="step2()">Unlock</button>
+    </div>
+
+    <div id="panel" style="display:none;">
+      <p>Admin unlocked</p>
+    </div>
+  </div>
+
+<script>
+function step1() {
+  if(document.getElementById("p1").value === "4141"){
+    document.getElementById("step2").style.display = "block";
+  }
+}
+
+function step2() {
+  if(document.getElementById("p2").value === "5505"){
+    document.getElementById("panel").style.display = "block";
+  }
+}
+</script>
+
+</body>
+</html>
