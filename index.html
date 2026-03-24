@@ -2,20 +2,82 @@
 <html>
 <head>
   <title>STC - Home</title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 </head>
 
 <body style="margin:0; font-family:sans-serif; background:#0b0f14; color:white; text-align:center;">
 
-  <h1>🌩️ STC - Storm Tracking Center</h1>
+<div id="banner" style="display:none; padding:10px; font-weight:bold;">
+  <marquee id="bannerText"></marquee>
+</div>
 
-  <div style="display:flex; flex-direction:column; gap:15px; padding:20px;">
-    <a href="models.html">📊 Models</a>
-    <a href="chasers.html">🌪️ Storm Chasers</a>
-    <a href="forecast.html">📅 STC Forecast</a>
-    <a href="radar.html">🛰️ Live Radar</a>
-    <a href="admin.html">🔐 Admin Panel</a>
-  </div>
+<h1>🌩️ STC - Storm Tracking Center</h1>
+
+<p id="statusText">Status: OFFLINE</p>
+
+<div>
+  <a href="models.html">Models</a> |
+  <a href="chasers.html">Live Chasing</a> |
+  <a href="forecast.html">Forecast</a> |
+  <a href="radar.html">Radar</a> |
+  <a href="admin.html">Admin</a>
+</div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAzL9TJ3i0u2U0lRoRnHOXKycPtoQmtB10",
+  authDomain: "stcalerts.firebaseapp.com",
+  projectId: "stcalerts",
+  storageBucket: "stcalerts.firebasestorage.app",
+  messagingSenderId: "570130296780",
+  appId: "1:570130296780:web:cf376823ff4c68108db769",
+  databaseURL: "https://stcalerts-default-rtdb.firebaseio.com"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// Status
+db.ref("status").on("value", snap => {
+  document.getElementById("statusText").innerText = "Status: " + (snap.val() || "OFFLINE");
+});
+
+// Alerts
+db.ref("alerts/current").on("value", snapshot => {
+  const alert = snapshot.val();
+
+  if (!alert) {
+    document.getElementById("banner").style.display = "none";
+    return;
+  }
+
+  let banner = document.getElementById("banner");
+  let text = document.getElementById("bannerText");
+
+  let message = "";
+
+  if (alert.type === "tornado_warning") {
+    message = "🚨 TORNADO WARNING 🚨 TAKE COVER IMMEDIATELY";
+    banner.style.background = "red";
+  } else if (alert.type === "tornado_watch") {
+    message = "⚠️ TORNADO WATCH ⚠️ CONDITIONS FAVORABLE";
+    banner.style.background = "orange";
+  } else if (alert.type === "severe_warning") {
+    message = "⛈️ SEVERE THUNDERSTORM WARNING";
+    banner.style.background = "yellow";
+  } else if (alert.type === "custom") {
+    message = alert.text;
+    banner.style.background = "#2563eb";
+  }
+
+  text.innerText = message;
+  banner.style.display = "block";
+});
+</script>
 
 </body>
 </html>
