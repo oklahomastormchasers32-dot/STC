@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin - STC</title>
+  <title>Admin Panel - STC</title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
@@ -26,6 +26,8 @@
 
     button {
       cursor:pointer;
+      background:#1f2937;
+      color:white;
     }
 
     .panel {
@@ -56,14 +58,14 @@
 
 <a href="index.html" style="color:#60a5fa;">⬅ Back Home</a>
 
-<!-- Login Step 1 -->
+<!-- Step 1 -->
 <div id="step1">
   <p>Step 1 Password</p>
   <input type="password" id="p1">
   <button onclick="check1()">Submit</button>
 </div>
 
-<!-- Login Step 2 -->
+<!-- Step 2 -->
 <div id="step2" style="display:none;">
   <p>Step 2 Password</p>
   <input type="password" id="p2">
@@ -82,26 +84,35 @@
   <button onclick="setStatus('CHASING')">CHASING</button>
 
   <!-- Alerts -->
-  <h3>Alert Type</h3>
+  <h3>🚨 Alerts</h3>
+
   <select id="alertType">
     <option value="none">None</option>
-    <option value="tornado_warning">🚨 Tornado Warning</option>
-    <option value="tornado_watch">⚠️ Tornado Watch</option>
-    <option value="severe_warning">⛈️ Severe Thunderstorm Warning</option>
-  </select>
-
-  <h3>Timer</h3>
-  <select id="timer">
-    <option value="5">5 min</option>
-    <option value="10">10 min</option>
-    <option value="15">15 min</option>
-    <option value="30">30 min</option>
-    <option value="60">1 hour</option>
+    <option value="tornado_warning">Tornado Warning</option>
+    <option value="tornado_watch">Tornado Watch</option>
+    <option value="severe_warning">Severe Thunderstorm Warning</option>
+    <option value="custom">Custom Text</option>
   </select>
 
   <br>
 
+  <input id="customText" placeholder="Custom alert text" style="width:250px;">
+
+  <br>
+
+  <label>Transmit Speed (seconds):</label>
+  <select id="speed">
+    <option value="6">6 sec</option>
+    <option value="8">8 sec</option>
+    <option value="10">10 sec</option>
+    <option value="12">12 sec</option>
+    <option value="15">15 sec</option>
+  </select>
+
+  <br><br>
+
   <button onclick="sendAlert()">Transmit Alert</button>
+  <button onclick="deleteAlert()">Delete Alert</button>
 
   <!-- Progress Bar -->
   <div class="progress">
@@ -129,7 +140,7 @@ function check1() {
   if (document.getElementById("p1").value === "4141") {
     document.getElementById("step2").style.display = "block";
   } else {
-    alert("Wrong");
+    alert("Wrong password");
   }
 }
 
@@ -137,7 +148,7 @@ function check2() {
   if (document.getElementById("p2").value === "5505") {
     document.getElementById("adminPanel").style.display = "block";
   } else {
-    alert("Wrong");
+    alert("Wrong password");
   }
 }
 
@@ -146,17 +157,18 @@ function setStatus(status) {
   db.ref("status").set(status);
 }
 
-// Alert transmit
+// Send alert
 function sendAlert() {
   let type = document.getElementById("alertType").value;
-  let timer = parseInt(document.getElementById("timer").value);
+  let text = document.getElementById("customText").value;
+  let speed = parseInt(document.getElementById("speed").value);
 
   let alertData = {
     type: type,
-    expires: Date.now() + timer * 60000
+    text: text,
+    expires: Date.now() + 3600000
   };
 
-  // Save to Firebase
   db.ref("alerts/current").set(alertData);
 
   // Progress bar animation
@@ -165,10 +177,15 @@ function sendAlert() {
   bar.style.width = "0%";
 
   let interval = setInterval(() => {
-    width += 2;
+    width += 1;
     bar.style.width = width + "%";
     if (width >= 100) clearInterval(interval);
-  }, (timer * 60000) / 50);
+  }, (speed * 1000) / 100);
+}
+
+// Delete alert
+function deleteAlert() {
+  db.ref("alerts/current").remove();
 }
 </script>
 
